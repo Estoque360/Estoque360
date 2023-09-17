@@ -1,0 +1,49 @@
+.header{
+  height: 100px;
+  background-color: #0035E5;
+}
+
+.nav{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img{
+  width: 100px;
+  
+}
+
+
+.header div{
+  width: 70px;
+}
+
+header div:last-child{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header a{
+  color: white;
+  text-decoration: none;
+  margin-right: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  transition: 0.3s all;
+}
+
+.header a:hover{
+  color: #131378;
+}
+
+.header .sair{
+  height: 30px;
+}
+
+.header .sair:hover{
+  color: #131378;
+  cursor: pointer;
+
+}
