@@ -1,0 +1,29 @@
+.button{
+    width: 350px;
+    height: 82px;
+    color: white;
+    background-color: #05B702;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 50px;
+    cursor: pointer;
+    transition: 0.3s all;
+}
+.div{
+    position: relative;
+    cursor: pointer;
+}
+
+.icon{
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    
+}
+
+.button:hover{
+    background-color: #379e36;
+}

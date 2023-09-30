@@ -1,3 +1,14 @@
 .inventario_container{
   margin-top: 50px;
+  padding-bottom: 50px;
+}
+
+.not_products{
+  text-align: center;
+  margin-top: 15px;
+}
+
+.navegation_products{
+  display: flex;
+  justify-content: space-between;
 }
