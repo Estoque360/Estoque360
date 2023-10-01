@@ -11,5 +11,5 @@ const ButtonCancelar = ({closeModal}) => {
 export default ButtonCancelar;
 
 ButtonCancelar.propTypes = {
-	closeModal: propTypes.shape()
+	closeModal: propTypes
 }.isRequired;

@@ -5,6 +5,7 @@ import Table from "./Table";
 import { getProducts } from "../utils/produto";
 import ButtonCadastrar from "./ButtonCadastrar";
 import ModalProduto from "./ModalProduto";
+import Header from "./Header";
 
 const Inventario = () => {
 
@@ -27,6 +28,7 @@ const Inventario = () => {
 
 	return (
 		<>
+			<Header/>
 			{modalIsOpen && <ModalProduto modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>}
 			<div className={`${style.inventario_container} container`}>
 				<div className={style.navegation_products}>

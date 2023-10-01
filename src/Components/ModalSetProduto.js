@@ -3,9 +3,11 @@ import styles from "./ModalSetProduto.module.css";
 import propTypes from "prop-types";
 import ButtonIncluir from "./ButtonIncluir";
 import ButtonCancelar from "./ButtonCancelar";
-import Error from "./Error";
+
 import { UseContext } from "../Context/UseContext";
 import { request } from "../utils/request.";
+
+import InputText from "./InputText";
 import { validaInput } from "../utils/validaInput";
 
 
@@ -14,25 +16,39 @@ const ModalSetProduto = ({setModalIsOpen}) => {
 	const contexto = React.useContext(UseContext);
 	const [error, setError] = React.useState(false);
 
+	const [name, setName] = React.useState([]);
+	const [price, setPrice] = React.useState([]);
+	const [quantidade, setQuantidade] = React.useState([]);
+	const [categoria, setCategoria] = React.useState([]);
 
-	const [name, setName] = React.useState("");
-	const [price, setPrice] = React.useState(null);
-	const [quantidade, setQuantidade] = React.useState(null);
-	const [categoria, setCategoria] = React.useState("");
 
 
 	async function handleRequest(event){
 		setError(true);
 		event.preventDefault();
-		try{
+		let contador = 0;
+		const validacoes = [validaInput("text", name), validaInput("number", price), validaInput("number", quantidade), validaInput("text", categoria)];
+
+		if(name && price && quantidade && categoria)
+		
+			validacoes.map((validacao) =>{
+				if(validacao){
+					contador += 1;
+				}
+			});
+		if(contador == 0){
+			try{
 			
-			const insert = await request(contexto.requestType, [name, categoria, price, quantidade]);
-			location.reload();
-			console.log(insert);
+				const insert = await request(contexto.requestType, [name, categoria, price, quantidade]);
+				location.reload();
+				console.log(insert);
 			
-		}catch(error){
-			console.log(error);
+			}catch(error){
+				console.log(error);
+			}
 		}
+		console.log(contador);
+		
 
 	}
 	return (
@@ -42,24 +58,16 @@ const ModalSetProduto = ({setModalIsOpen}) => {
 				<p onClick={() => setModalIsOpen(false)} className={styles.close}>X</p>
 			</div>
 			<form onSubmit={handleRequest}>
-				<label htmlFor="name">Nome</label>
-				<input type="text" onChange={({target}) => setName(target.value)} value={name} id="name" placeholder="Camisa"/>
-				{error && <Error error={validaInput("text", name)}/>}
+				<InputText state={name} placeholder="Camisa" setState={setName} label="Nome" idInput="name" error={error} typeInput="text"/> 
 				<div className={styles.input_small}>
 					<div>
-						<label htmlFor="price">Preço</label>
-						<input onChange={({target}) => setPrice(target.value)} value={price} type="text" id="price" placeholder="R$ 00,00"/>
-						{error && <Error error={validaInput("number", price)}/>}
+						<InputText state={price} placeholder="R$ 00.00" setState={setPrice} label="Preço" idInput="price" error={error} typeInput="number"/>
 					</div>
 					<div>
-						<label htmlFor="quantidade">Quantidade</label>
-						<input onChange={({target}) => setQuantidade(target.value)} value={quantidade} type="text" id="quantidade" placeholder="000"/>
-						{error && <Error error={validaInput("number", quantidade)}/>}
+						<InputText state={quantidade} placeholder="000" setState={setQuantidade} label="Quantidade" idInput="qtt" error={error} typeInput="number"/>
 					</div>
 				</div>
-				<label htmlFor="categoria">Categoria</label>
-				<input onChange={({target}) => setCategoria(target.value)} value={categoria} type="text" id="categoria" placeholder="Vestuário"/>
-				{error && <Error error={validaInput("text", categoria)}/>}
+				<InputText state={categoria} placeholder="Vestuário" setState={setCategoria} label="Categoria" idInput="category" error={error} typeInput="text"/>
 				<div className={styles.button_container}>
 					<ButtonCancelar closeModal={setModalIsOpen}/>
 					<ButtonIncluir />

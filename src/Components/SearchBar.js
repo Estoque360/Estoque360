@@ -9,12 +9,10 @@ const SearchBar = () => {
 	function handleSubmit(){
 		
 	}
-
-
 	return (
 		<form onSubmit={handleSubmit}>
 			<input className={style.input} onChange={(event) => setInputValue(event.target.value)} value={inputValue} type="text" placeholder="Pesquisar"/>
-			<Search className={style.search}/>
+			<Search className={style.search} onClick={handleSubmit}/>
 		</form>
 	);
 };
